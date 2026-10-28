@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://qflow-env.eba-fkxskcpz.ap-south-1.elasticbeanstalk.com/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://qflow-env.eba-fkxskcpz.ap-south-1.elasticbeanstalk.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
