@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased overflow-x-hidden bg-[#FBF8F2] text-[#231522];
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3 {
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Architectural Geometric Shapes */
+.geometric-arch {
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+}
+
+.geometric-arch-full {
+  border-radius: 9999px 9999px 28px 28px;
+}
+
+.geometric-cutout-hero {
+  border-top-left-radius: 280px;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.geometric-quarter-circle {
+  border-radius: 0 100% 0 0;
+}
+
+.geometric-semi-circle-left {
+  border-radius: 260px 0 0 260px;
+}
+
+/* Editorial typography utilities */
+.font-editorial {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sans-luxury {
+  font-family: 'Satoshi', 'General Sans', 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5EFE4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8CAB9;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C3532B;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #170E16;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3D263A;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #C3532B;
+}
+
+/* Refined Subtle Pulse for Live Indicator */
+@keyframes subtle-pulse {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.96);
+    opacity: 0.8;
+  }
+}
+
+.live-indicator {
+  animation: subtle-pulse 2.2s infinite ease-in-out;
+}

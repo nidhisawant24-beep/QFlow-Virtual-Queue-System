@@ -1,0 +1,34 @@
+{
+  "name": "qflow",
+  "version": "1.0.0",
+  "description": "QFlow – Smart Virtual Queue Management System (MERN Stack with Real-time Socket.IO)",
+  "main": "backend/server.js",
+  "scripts": {
+    "postinstall": "npm --prefix backend install && npm --prefix frontend install",
+    "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install",
+    "dev": "concurrently -k -n \"BACKEND,FRONTEND\" -c \"cyan,magenta\" \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "start": "concurrently -k -n \"BACKEND,FRONTEND\" -c \"cyan,magenta\" \"npm run start --prefix backend\" \"npm run preview --prefix frontend\"",
+    "build": "npm --prefix backend install && npm --prefix frontend install && npm run build --prefix frontend",
+    "seed": "npm run seed --prefix backend"
+  },
+  "keywords": [
+    "queue-management",
+    "virtual-queue",
+    "smart-queue",
+    "socket.io",
+    "mern",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "QFlow Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1157.0",
+    "multer": "^2.5.0",
+    "multer-s3": "^3.0.1"
+  }
+}
