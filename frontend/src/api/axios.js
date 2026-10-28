@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://qflow-env.eba-fkxskcpz.ap-south-1.elasticbeanstalk.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -26,8 +26,6 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // If expired token, clear storage if needed
-      // but avoid redirect loops on public routes
       const token = localStorage.getItem('qflow_token');
       if (token && error.config.url !== '/auth/me') {
         localStorage.removeItem('qflow_token');
