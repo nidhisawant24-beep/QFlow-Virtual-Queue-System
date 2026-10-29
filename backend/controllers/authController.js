@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const sendEmail = require('../utils/sendEmail');
 
 // Helper to generate JWT Token
 const generateToken = (id) => {
@@ -65,14 +66,20 @@ const registerCustomer = async (req, res, next) => {
 
     const token = generateToken(user._id);
 
-    await sendEmail({
-    to: user.email,
-    subject: "Welcome to QFlow",
-    html: `
-        <h2>Welcome ${user.name}</h2>
-        <p>Your account has been created successfully.</p>
-    `
-});
+    try {
+      if (user.email) {
+        await sendEmail({
+          to: user.email,
+          subject: "Welcome to QFlow",
+          html: `
+              <h2>Welcome ${user.name}</h2>
+              <p>Your account has been created successfully.</p>
+          `
+        });
+      }
+    } catch (emailErr) {
+      console.warn("Welcome email could not be sent:", emailErr.message);
+    }
 
     res.status(201).json({
       success: true,

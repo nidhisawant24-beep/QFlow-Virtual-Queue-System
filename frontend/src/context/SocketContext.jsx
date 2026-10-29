@@ -9,8 +9,9 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     // In dev, Vite proxies /socket.io to localhost:5000
-    // In production, connects to same origin or window.location.origin
-    const socketInstance = io('/', {
+    // In production, connects to Elastic Beanstalk backend
+    const socketEndpoint = import.meta.env.VITE_SOCKET_URL || (import.meta.env.PROD ? 'http://QFlow-env.eba-fkxskcpz.ap-south-1.elasticbeanstalk.com' : '/');
+    const socketInstance = io(socketEndpoint, {
       transports: ['websocket', 'polling'],
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
