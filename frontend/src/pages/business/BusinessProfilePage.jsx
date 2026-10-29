@@ -64,15 +64,18 @@ const BusinessProfilePage = () => {
 
     setUploadingLogo(true);
     try {
-      const res = await api.post('/businesses/logo', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const res = await api.post('/businesses/logo', formData);
 
       if (res.data.success) {
         toast.success('Logo uploaded successfully!');
-        setLogoPreview(res.data.logoUrl);
-        // update local user state
-        setUser((prev) => ({ ...prev, businessLogo: res.data.logoUrl }));
+        const newLogoUrl = res.data.logoUrl;
+        setLogoPreview(newLogoUrl);
+        // update local user state & persist to localStorage
+        setUser((prev) => {
+          const updated = { ...prev, businessLogo: newLogoUrl };
+          localStorage.setItem('qflow_user', JSON.stringify(updated));
+          return updated;
+        });
       }
     } catch (error) {
       const msg = error.response?.data?.message || 'Failed to upload logo';

@@ -188,6 +188,22 @@ const registerBusiness = async (req, res, next) => {
 
     const token = generateToken(user._id);
 
+    try {
+      if (user.email) {
+        await sendEmail({
+          to: user.email,
+          subject: "Welcome to QFlow - Business Account Active",
+          html: `
+              <h2>Welcome to QFlow, ${user.name}!</h2>
+              <p>Your business account for <strong>${user.businessName}</strong> has been registered successfully.</p>
+              <p>You can now manage virtual queues, configure operating desks, and streamline customer arrivals in real time.</p>
+          `
+        });
+      }
+    } catch (emailErr) {
+      console.warn("Welcome business email could not be sent:", emailErr.message);
+    }
+
     res.status(201).json({
       success: true,
       message: 'Business registered successfully',
